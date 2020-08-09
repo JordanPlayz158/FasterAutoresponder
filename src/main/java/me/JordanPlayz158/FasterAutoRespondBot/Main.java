@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import org.apache.log4j.BasicConfigurator;
 
 import javax.security.auth.login.LoginException;
 import java.io.File;
@@ -16,6 +17,8 @@ import java.util.List;
 public class Main extends ListenerAdapter {
 
     public static void main(String[] args) throws LoginException {
+        BasicConfigurator.configure();
+
         if (args.length < 1) {
             System.out.println("You have to provide a token as first argument!");
             System.exit(1);
