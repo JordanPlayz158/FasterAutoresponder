@@ -24,7 +24,6 @@ public class Main extends ListenerAdapter {
         // args[0] should be the token
         // We only need 2 intent in this bot. We only respond to messages in guilds and private channels.
         // All other events will be disabled.
-        // My Token: "NzQxNjY5MjQ2Mjc0MzcxNzg1.Xy67Tw.KdpSvTGZLW6AlNVcUIu7lJckvS8"
         JDABuilder.createLight(args[0], GatewayIntent.GUILD_MESSAGES)
                 .addEventListeners(new Main())
                 .setActivity(Activity.watching("For CopyPastas"))
