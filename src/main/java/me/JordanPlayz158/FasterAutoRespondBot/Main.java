@@ -67,7 +67,7 @@ public class Main extends ListenerAdapter {
                 System.out.println("Log:\nGuild: " + GuildName + autoAddBrackets(GuildId)
                         + "\nChannel: " + ChannelName + autoAddBrackets(ChannelId)
                         + "\nUser: " + UserName + autoAddBrackets(UserId)
-                        + "\nMessage: " + MessageContent + autoAddBrackets(MessageURL));
+                        + "\nMessage: " + MessageContent + autoAddBrackets(MessageURL) + "\n");
                 break;
             }
         }
