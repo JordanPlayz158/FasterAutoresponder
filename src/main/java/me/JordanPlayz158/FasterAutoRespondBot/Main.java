@@ -53,7 +53,7 @@ public class Main extends ListenerAdapter {
                 File file = new File("CopyPasta_Hack_BS_Black.png");
                 channel.sendMessage(GetMember.getUser().getAsMention() + "'s message has been auto detected as a copypasta, if this message is about people stealing ips through discord, refer to the image below")
                         .addFile(file).queue();
-                channel.sendMessage("```-warn " + GetMember.getUser().getAsMention() + "Rule 23").queue();
+                channel.sendMessage("```-warn " + GetMember.getUser().getAsMention() + " Rule 23```").queue();
 
                 // I don't need to make these strings but I am just for the sake of readability
                 String GuildName = GetGuild.getName();
