@@ -64,7 +64,7 @@ public class Main extends ListenerAdapter {
                 String MessageURL = msg.getJumpUrl();
 
                 // I don't need to use so many "" but I used them for the sake of readability
-                System.out.println("\nLog:\nGuild: " + GuildName + autoAddBrackets(GuildId)
+                System.out.println("Log:\nGuild: " + GuildName + autoAddBrackets(GuildId)
                         + "\nChannel: " + ChannelName + autoAddBrackets(ChannelId)
                         + "\nUser: " + UserName + autoAddBrackets(UserId)
                         + "\nMessage: " + MessageContent + autoAddBrackets(MessageURL));
