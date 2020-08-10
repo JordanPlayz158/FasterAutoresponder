@@ -68,6 +68,7 @@ public class Main extends ListenerAdapter {
                         + ") Channel: " + ChannelName + " (" + ChannelId
                         + ") User: " + UserName + " (" + UserId
                         + ") Message: " + MessageContent + " (" + MessageURL + ")");
+                break;
             }
         }
     }
