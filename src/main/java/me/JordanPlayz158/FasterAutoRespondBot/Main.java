@@ -40,7 +40,7 @@ public class Main extends ListenerAdapter {
         Message msg = event.getMessage();
         MessageChannel channel = event.getChannel();
 
-        List<String> copypastas = Arrays.asList("copy & paste this message", "copy and paste this message", "send this to all the servers you are in", "tell everyone on your friends list", "do not accept a friend request from", "please spread the word of this to your other servers", "if you see this user, do not accept his friend request and immediately block him");
+        List<String> copypastas = Arrays.asList("copy & paste this message", "copy and paste this message", "copy & paste this msg", "copy and paste this msg", "send this to all the servers you are in", "tell everyone on your friends list", "do not accept a friend request from", "please spread the word of this to your other servers", "if you see this user, do not accept his friend request and immediately block him");
 
         for(String s : copypastas) {
             if(msg.getContentRaw().toLowerCase().contains(s))
