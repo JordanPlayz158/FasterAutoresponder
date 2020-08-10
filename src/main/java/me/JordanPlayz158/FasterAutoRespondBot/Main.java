@@ -1,13 +1,13 @@
 package me.JordanPlayz158.FasterAutoRespondBot;
 
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import javax.security.auth.login.LoginException;
 import java.io.File;
@@ -18,6 +18,7 @@ public class Main extends ListenerAdapter {
 
     public static void main(String[] args) throws LoginException {
         BasicConfigurator.configure();
+        Logger.getRootLogger().setLevel(Level.INFO);
 
         if (args.length < 1) {
             System.out.println("You have to provide a token as first argument!");
@@ -47,7 +48,26 @@ public class Main extends ListenerAdapter {
                 File file = new File("CopyPasta_Hack_BS_Black.png");
                 channel.sendMessage("This message has been auto detected as a copypasta, if this message is about people stealing ips through discord, refer to the image below").queue();
                 channel.sendFile(file).queue();
-                break;
+
+                // I don't need to make these strings but I am just for the sake of readability
+                Guild GetGuild = msg.getGuild();
+                Member GetMember = msg.getMember();
+                MessageChannel GetChannel = msg.getChannel();
+
+                String GuildName = GetGuild.getName();
+                String GuildId = GetGuild.getId();
+                String ChannelName = GetChannel.getName();
+                String ChannelId = GetChannel.getId();
+                String UserName = GetMember.getUser().getName();
+                String UserId = GetMember.getUser().getId();
+                String MessageContent = msg.getContentRaw();
+                String MessageURL = msg.getJumpUrl();
+
+                // I don't need to use so many "" but I used them for the sake of readability
+                System.out.println("Log: Guild: " + GuildName + " (" + GuildId
+                        + ") Channel: " + ChannelName + " (" + ChannelId
+                        + ") User: " + UserName + " (" + UserId
+                        + ") Message: " + MessageContent + " (" + MessageURL + ")");
             }
         }
     }
