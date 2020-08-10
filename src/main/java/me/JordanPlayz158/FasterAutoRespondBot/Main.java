@@ -51,7 +51,7 @@ public class Main extends ListenerAdapter {
                 MessageChannel GetChannel = msg.getChannel();
 
                 File file = new File("CopyPasta_Hack_BS_Black.png");
-                channel.sendMessage(GetMember.getUser().getAsTag() + "'s message has been auto detected as a copypasta, if this message is about people stealing ips through discord, refer to the image below")
+                channel.sendMessage(GetMember.getUser().getAsMention() + "'s message has been auto detected as a copypasta, if this message is about people stealing ips through discord, refer to the image below")
                         .addFile(file).queue();
 
                 // I don't need to make these strings but I am just for the sake of readability
