@@ -46,15 +46,15 @@ public class Main extends ListenerAdapter {
         for(String s : copypastas) {
             if(msg.getContentRaw().toLowerCase().contains(s))
             {
-                File file = new File("CopyPasta_Hack_BS_Black.png");
-                channel.sendMessage("This message has been auto detected as a copypasta, if this message is about people stealing ips through discord, refer to the image below")
-                        .addFile(file).queue();
-
-                // I don't need to make these strings but I am just for the sake of readability
                 Guild GetGuild = msg.getGuild();
                 Member GetMember = msg.getMember();
                 MessageChannel GetChannel = msg.getChannel();
 
+                File file = new File("CopyPasta_Hack_BS_Black.png");
+                channel.sendMessage(GetMember.getUser().getAsTag() + "'s message has been auto detected as a copypasta, if this message is about people stealing ips through discord, refer to the image below")
+                        .addFile(file).queue();
+
+                // I don't need to make these strings but I am just for the sake of readability
                 String GuildName = GetGuild.getName();
                 String GuildId = GetGuild.getId();
                 String ChannelName = GetChannel.getName();
