@@ -1,6 +1,5 @@
 package me.JordanPlayz158.FasterAutoRespondBot;
 
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -11,9 +10,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import javax.security.auth.login.LoginException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,21 +41,14 @@ public class Main extends ListenerAdapter {
         MessageChannel channel = event.getChannel();
 
         List<String> copypastas = Arrays.asList("copy & paste this message", "copy and paste this message", "copy & paste this msg", "copy and paste this msg", "send this to all the servers you are in", "tell everyone on your friends list", "do not accept a friend request from", "please spread the word of this to your other servers", "if you see this user, do not accept his friend request and immediately block him");
+        List<String> asciiCopypastas = Arrays.asList("copy and paste him in every discord server");
 
         for(String s : copypastas) {
             if(msg.getContentRaw().toLowerCase().contains(s))
             {
-                EmbedBuilder embed = new EmbedBuilder();
-                InputStream file = null;
-                try {
-                    file = new URL("https://dl.jordanplayz158.me/CopyPasta_Hack_BS_Black.png").openStream();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                embed.setImage("attachment://CopyPasta_Hack_BS_Black.png")
-                        .setDescription("This message has been auto detected as a copypasta, if this message is about people stealing ips through discord, refer to the image below");
-                channel.sendFile(file, "CopyPasta_Hack_BS_Black.png").embed(embed.build()).queue();
+                File file = new File("CopyPasta_Hack_BS_Black.png");
+                channel.sendMessage("This message has been auto detected as a copypasta, if this message is about people stealing ips through discord, refer to the image below")
+                        .addFile(file).queue();
 
                 // I don't need to make these strings but I am just for the sake of readability
                 Guild GetGuild = msg.getGuild();
