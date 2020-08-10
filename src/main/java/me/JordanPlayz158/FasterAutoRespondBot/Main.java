@@ -10,6 +10,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import javax.security.auth.login.LoginException;
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,9 +45,9 @@ public class Main extends ListenerAdapter {
         for(String s : copypastas) {
             if(msg.getContentRaw().toLowerCase().contains(s))
             {
-//                File file = new File("CopyPasta_Hack_BS_Black.png");
+                File file = new File("CopyPasta_Hack_BS_Black.png");
                 channel.sendMessage("This message has been auto detected as a copypasta, if this message is about people stealing ips through discord, refer to the image below").queue();
-//                channel.sendFile(file).queue();
+                channel.sendFile(file).queue();
 
                 // I don't need to make these strings but I am just for the sake of readability
                 Guild GetGuild = msg.getGuild();
