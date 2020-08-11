@@ -23,30 +23,30 @@ public class CopyPastaDetection extends ListenerAdapter {
         for(String s : copypastas) {
             if(msg.getContentRaw().toLowerCase().contains(s))
             {
-                Guild GetGuild = msg.getGuild();
-                Member GetMember = msg.getMember();
-                MessageChannel GetChannel = msg.getChannel();
+                Guild getGuild = msg.getGuild();
+                Member getMember = msg.getMember();
+                MessageChannel getChannel = msg.getChannel();
 
                 File file = new File("CopyPasta_Hack_BS_Black.png");
-                channel.sendMessage(GetMember.getUser().getAsMention() + "'s message has been auto detected as a copypasta, if this message is about people stealing ips through discord, refer to the image below")
+                channel.sendMessage(getMember.getUser().getAsMention() + "'s message has been auto detected as a copypasta, if this message is about people stealing ips through discord, refer to the image below")
                         .addFile(file).queue();
-                channel.sendMessage(GetGuild.getRoleById("742447734606528653").getAsMention() + " ```-warn " + GetMember.getUser().getAsMention() + " Rule 23```").queue();
+                channel.sendMessage(getGuild.getRoleById("742447734606528653").getAsMention() + " ```-warn " + getMember.getUser().getAsMention() + " Rule 23```").queue();
 
                 // I don't need to make these strings but I am just for the sake of readability
-                String GuildName = GetGuild.getName();
-                String GuildId = GetGuild.getId();
-                String ChannelName = GetChannel.getName();
-                String ChannelId = GetChannel.getId();
-                String UserName = GetMember.getUser().getName();
-                String UserId = GetMember.getUser().getId();
-                String MessageContent = msg.getContentRaw();
-                String MessageURL = msg.getJumpUrl();
+                String guildName = getGuild.getName();
+                String guildId = getGuild.getId();
+                String channelName = getChannel.getName();
+                String channelId = getChannel.getId();
+                String userName = getMember.getUser().getName();
+                String userId = getMember.getUser().getId();
+                String messageContent = msg.getContentRaw();
+                String messageURL = msg.getJumpUrl();
 
                 // I don't need to use so many "" but I used them for the sake of readability
-                System.out.println("Log:\nGuild: " + GuildName + autoAddBrackets(GuildId)
-                        + "\nChannel: " + ChannelName + autoAddBrackets(ChannelId)
-                        + "\nUser: " + UserName + autoAddBrackets(UserId)
-                        + "\nMessage: " + MessageContent + autoAddBrackets(MessageURL));
+                System.out.println("Log:\nGuild: " + guildName + autoAddBrackets(guildId)
+                        + "\nChannel: " + channelName + autoAddBrackets(channelId)
+                        + "\nUser: " + userName + autoAddBrackets(userId)
+                        + "\nMessage: " + messageContent + autoAddBrackets(messageURL));
                 break;
             }
         }

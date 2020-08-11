@@ -10,7 +10,9 @@ import org.apache.log4j.Logger;
 import javax.security.auth.login.LoginException;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 public class Main {
 
@@ -18,10 +20,8 @@ public class Main {
         // Initiates the log
         initiateLog();
 
-        File config = new File("config.yml");
-        File image = new File ("CopyPasta_Hack_BS_Black.png");
-        copyFile(config, config);
-        copyFile(image, image);
+        copyFile("config.yml", "config.yml");
+        copyFile("CopyPasta_Hack_BS_Black.png", "CopyPasta_Hack_BS_Black.png");
 
         // Checks if the Token is less than 1 character and if so, tell the person they need to provide a token
         if (args.length < 1) {
@@ -45,9 +45,10 @@ public class Main {
         Logger.getRootLogger().setLevel(Level.INFO);
     }
 
-    private static void copyFile(File source, File dest) throws IOException {
-        if(dest.createNewFile()) {
-            Files.copy(source.toPath(), dest.toPath());
-        }
+    private static void copyFile(String internalName, String externalName) throws IOException {
+        File fileDest = new File(externalName);
+        InputStream fileSrc = Thread.currentThread().getContextClassLoader().getResourceAsStream(internalName);
+
+        Files.copy(fileSrc, fileDest.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 }
