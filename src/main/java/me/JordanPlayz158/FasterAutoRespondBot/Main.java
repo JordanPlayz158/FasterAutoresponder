@@ -1,9 +1,7 @@
 package me.JordanPlayz158.FasterAutoRespondBot;
 
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
@@ -11,76 +9,45 @@ import org.apache.log4j.Logger;
 
 import javax.security.auth.login.LoginException;
 import java.io.File;
-import java.util.Arrays;
-import java.util.List;
+import java.io.IOException;
+import java.nio.file.Files;
 
-public class Main extends ListenerAdapter {
+public class Main {
 
-    public static void main(String[] args) throws LoginException {
-        BasicConfigurator.configure();
-        Logger.getRootLogger().setLevel(Level.INFO);
+    public static void main(String[] args) throws LoginException, IOException {
+        // Initiates the log
+        initiateLog();
 
+        File config = new File("config.yml");
+        File image = new File ("CopyPasta_Hack_BS_Black.png");
+        copyFile(config, config);
+        copyFile(image, image);
+
+        // Checks if the Token is less than 1 character and if so, tell the person they need to provide a token
         if (args.length < 1) {
             System.out.println("You have to provide a token as first argument!");
             System.exit(1);
         }
 
-        // args[0] should be the token
-        // We only need 2 intent in this bot. We only respond to messages in guilds and private channels.
-        // All other events will be disabled.
+        // args[0] should be the token -------> Token will soon be going into a config.yml and read from it
+        // This bot only needs to respond to guild messages so it only needs GatewayIntent.GUILD_MESSAGES
         JDABuilder.createLight(args[0], GatewayIntent.GUILD_MESSAGES)
-                .addEventListeners(new Main())
+                .addEventListeners(new CopyPastaDetection())
                 .setActivity(Activity.watching("For CopyPastas"))
                 .setLargeThreshold(50)
                 .build();
     }
 
-    @Override
-    public void onMessageReceived(MessageReceivedEvent event) {
-        Message msg = event.getMessage();
-        MessageChannel channel = event.getChannel();
-
-        List<String> copypastas = Arrays.asList("copy & paste this message", "copy and paste this message", "copy & paste this msg", "copy and paste this msg", "send this to all the servers you are in", "tell everyone on your friends list", "do not accept a friend request from", "please spread the word of this to your other servers", "if you see this user, do not accept his friend request and immediately block him");
-        List<String> asciiCopypastas = Arrays.asList("copy and paste him in every discord server");
-
-        for(String s : copypastas) {
-            if(msg.getContentRaw().toLowerCase().contains(s))
-            {
-                Guild GetGuild = msg.getGuild();
-                Member GetMember = msg.getMember();
-                MessageChannel GetChannel = msg.getChannel();
-
-                File file = new File("CopyPasta_Hack_BS_Black.png");
-                channel.sendMessage(GetMember.getUser().getAsMention() + "'s message has been auto detected as a copypasta, if this message is about people stealing ips through discord, refer to the image below")
-                        .addFile(file).queue();
-                channel.sendMessage(GetGuild.getRoleById("742447734606528653").getAsMention() + " ```-warn " + GetMember.getUser().getAsMention() + " Rule 23```").queue();
-
-                // I don't need to make these strings but I am just for the sake of readability
-                String GuildName = GetGuild.getName();
-                String GuildId = GetGuild.getId();
-                String ChannelName = GetChannel.getName();
-                String ChannelId = GetChannel.getId();
-                String UserName = GetMember.getUser().getName();
-                String UserId = GetMember.getUser().getId();
-                String MessageContent = msg.getContentRaw();
-                String MessageURL = msg.getJumpUrl();
-
-                // I don't need to use so many "" but I used them for the sake of readability
-                System.out.println("Log:\nGuild: " + GuildName + autoAddBrackets(GuildId)
-                        + "\nChannel: " + ChannelName + autoAddBrackets(ChannelId)
-                        + "\nUser: " + UserName + autoAddBrackets(UserId)
-                        + "\nMessage: " + MessageContent + autoAddBrackets(MessageURL));
-                break;
-            }
-        }
+    private static void initiateLog() {
+        // Fix for "Failed to load class "org.slf4j.impl.StaticLoggerBinder"
+        BasicConfigurator.configure();
+        // Only log INFO logs as to not make console messy with DEBUG logs
+        Logger.getRootLogger().setLevel(Level.INFO);
     }
 
-    public String autoAddBrackets(String raw) {
-        String result = "";
-        result += " (";
-        result += raw;
-        result += ") ";
-
-        return result;
+    private static void copyFile(File source, File dest) throws IOException {
+        if(dest.createNewFile()) {
+            Files.copy(source.toPath(), dest.toPath());
+        }
     }
 }

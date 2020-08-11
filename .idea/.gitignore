@@ -1,4 +1,7 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+/usage.statistics.xml
+/tasks.xml
+/dictionaries
 target/
