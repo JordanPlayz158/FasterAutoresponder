@@ -1,6 +1,6 @@
 # Faster AutoRespond Bot
 
-Faster AutoRespond Bot is a bot for [Faster](https://jordanplayz158.me/job/Faster-AutoResponder-Bot/)'s server
+Faster AutoRespond Bot is a bot for [Faster](https://www.youtube.com/fasterofficialsc)'s server
 
 ## Get the jar
 
