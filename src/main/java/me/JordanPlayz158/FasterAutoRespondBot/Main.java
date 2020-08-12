@@ -14,9 +14,10 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
-public class Main {
-
-    public static void main(String[] args) throws LoginException, IOException, InterruptedException {
+public class Main 
+{
+    public static void main(String[] args) throws LoginException, IOException, InterruptedException 
+    {
         // Initiates the log
         initiateLog();
 
@@ -38,14 +39,17 @@ public class Main {
                 .build().awaitReady();
     }
 
-    private static void initiateLog() {
+    private static void initiateLog() 
+    {
         // Fix for "Failed to load class "org.slf4j.impl.StaticLoggerBinder"
         BasicConfigurator.configure();
+        
         // Only log INFO logs as to not make console messy with DEBUG logs
         Logger.getRootLogger().setLevel(Level.INFO);
     }
 
-    private static void copyFile(String internalName, String externalName) throws IOException {
+    private static void copyFile(String internalName, String externalName) throws IOException 
+    {
         File fileDest = new File(externalName);
         InputStream fileSrc = Thread.currentThread().getContextClassLoader().getResourceAsStream(internalName);
 

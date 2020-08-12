@@ -8,9 +8,14 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-public class CopyPastaDetection extends ListenerAdapter {
+import me.JordanPlayz158.FasterAutoRespondBot.Utils;
+
+public class CopyPastaDetection extends ListenerAdapter 
+{
+
     @Override
-    public void onMessageReceived(MessageReceivedEvent event) {
+    public void onMessageReceived(MessageReceivedEvent event) 
+    {
         Message msg = event.getMessage();
         MessageChannel channel = event.getChannel();
 
@@ -26,25 +31,48 @@ public class CopyPastaDetection extends ListenerAdapter {
         String userId = getMember.getUser().getId();
         String messageContent = msg.getContentRaw();
 
-        List<String> copypastas = Arrays.asList("copy & paste this message", "copy and paste this message", "copy & paste this msg", "copy and paste this msg", "send this to all the servers you are in", "send this message to all the servers", "tell everyone on your friends list", "do not accept a friend request from", "please spread the word of this to your other servers", "if you see this user, do not accept his friend request and immediately block him");
-        List<String> asciiCopypastas = Arrays.asList("spread him to take over discord", "copy and paste him in every discord server", "this is memecat", "this is memedog", "this is lennypede");
+        List<String> copypastas = Arrays.asList("copy & paste this message", 
+            "copy and paste this message", 
+            "copy & paste this msg", 
+            "copy and paste this msg", 
+            "send this to all the servers you are in", 
+            "send this message to all the servers", 
+            "tell everyone on your friends list", 
+            "do not accept a friend request from", 
+            "please spread the word of this to your other servers", 
+            "if you see this user, do not accept his friend request and immediately block him");
 
-        for(String s : copypastas) {
+        List<String> asciiCopypastas = Arrays.asList("copy and paste him in every discord server", 
+            "this is memecat", 
+            "this is memedog", 
+            "this is lennypede");
+
+        for(String s : copypastas) 
+        {
             if(msg.getContentRaw().toLowerCase().contains(s) && !msg.getAuthor().isBot())
             {
-                if(msg.getContentRaw().toLowerCase().contains("ip")) {
+                if(msg.getContentRaw().toLowerCase().contains("ip")) 
+                {
                     File file = new File("CopyPasta_Hack_BS_Black.png");
                     channel.sendMessage(getMember.getUser().getAsMention() + "'s message has been auto detected as a copypasta which is in violation of rule 23, please read the " + getGuild.getTextChannelById("546053935958327316").getAsMention())
                             .addFile(file).queue();
-                } else {
+                } else 
+                {
                     channel.sendMessage(getMember.getUser().getAsMention() + "'s message has been auto detected as a copypasta which is in violation of rule 23, please read the " + getGuild.getTextChannelById("546053935958327316").getAsMention()).queue();
                 }
                 channel.sendMessage(getGuild.getRoleById("742447734606528653").getAsMention() + " ```-warn " + getMember.getUser().getAsMention() + " Rule 23```").queue();
 
-                System.out.println("Log:\nGuild: " + guildName + autoAddBrackets(guildId)
-                        + "\nChannel: " + channelName + autoAddBrackets(channelId)
-                        + "\nUser: " + userName + autoAddBrackets(userId)
-                        + "\nMessage: " + messageContent);
+                String output = addStrings("Log:\nGuild: ", 
+                    guildName,
+                    autoAddBrackets(guildId), "\nChannel: ", 
+                    channelName,
+                    autoAddBrackets(channelId), "\nUser: ", 
+                    userName, 
+                    autoAddBrackets(userId),
+                    "\nMessage: ", 
+                    messageContent);
+
+                System.out.println(ouput);
 
                 LoggerDiscord(event);
                 msg.delete().queue();
@@ -52,15 +80,28 @@ public class CopyPastaDetection extends ListenerAdapter {
             }
         }
 
-        for(String s : asciiCopypastas) {
-            if(msg.getContentRaw().toLowerCase().contains(s) && !msg.getAuthor().isBot()) {
-                channel.sendMessage(getMember.getUser().getAsMention() + "'s message has been auto detected as a copypasta which is in violation of rule 23, please read the " + getGuild.getTextChannelById("546053935958327316").getAsMention()).queue();
+        for(String s : asciiCopypastas) 
+        {
+            if(msg.getContentRaw().toLowerCase().contains(s) && !msg.getAuthor().isBot()) 
+            {
+                channel.sendMessage(getMember.getUser().getAsMention() 
+                    + "'s message has been auto detected as a copypasta which is in violation of rule 23, please read the " 
+                    + getGuild.getTextChannelById("546053935958327316").getAsMention()).queue();
+
                 channel.sendMessage(getGuild.getRoleById("742447734606528653").getAsMention() + " ```-warn " + getMember.getUser().getAsMention() + " Rule 23```").queue();
 
-                System.out.println("Log:\nGuild: " + guildName + autoAddBrackets(guildId)
-                        + "\nChannel: " + channelName + autoAddBrackets(channelId)
-                        + "\nUser: " + userName + autoAddBrackets(userId)
-                        + "\nMessage: " + messageContent);
+                String output = addStrings("Log:\nGuild: ",
+                    guildName,
+                    autoAddBrackets(guildId),
+                    "\nChannel: ",
+                    channelName, 
+                    autoAddBrackets(channelId),
+                    "\nUser: " + userName,
+                    autoAddBrackets(userId),
+                    "\nMessage: ",
+                    messageContent);
+
+                System.out.println(output);
 
                 LoggerDiscord(event);
                 msg.delete().queue();
@@ -69,7 +110,8 @@ public class CopyPastaDetection extends ListenerAdapter {
         }
     }
 
-    public String autoAddBrackets(String raw) {
+    public String autoAddBrackets(String raw) 
+    {
         String result = "";
         result += " (";
         result += raw;
@@ -78,7 +120,8 @@ public class CopyPastaDetection extends ListenerAdapter {
         return result;
     }
 
-    public void LoggerDiscord(MessageReceivedEvent event) {
+    public void LoggerDiscord(MessageReceivedEvent event) 
+    {
         TextChannel textChannel = event.getGuild().getTextChannelsByName("copypastalogs", true).get(0);
 
         Message msg = event.getMessage();
