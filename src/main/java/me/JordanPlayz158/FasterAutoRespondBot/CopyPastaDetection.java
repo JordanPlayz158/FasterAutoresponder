@@ -27,7 +27,7 @@ public class CopyPastaDetection extends ListenerAdapter {
         String messageContent = msg.getContentRaw();
 
         List<String> copypastas = Arrays.asList("copy & paste this message", "copy and paste this message", "copy & paste this msg", "copy and paste this msg", "send this to all the servers you are in", "tell everyone on your friends list", "do not accept a friend request from", "please spread the word of this to your other servers", "if you see this user, do not accept his friend request and immediately block him");
-        List<String> asciiCopypastas = Arrays.asList("copy and paste him in every discord server", "this is memecat");
+        List<String> asciiCopypastas = Arrays.asList("copy and paste him in every discord server", "this is memecat", "this is memedog");
 
         for(String s : copypastas) {
             if(msg.getContentRaw().toLowerCase().contains(s) && !msg.getAuthor().isBot())
