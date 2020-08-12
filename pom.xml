@@ -70,6 +70,12 @@
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
             <version>4.2.0_189</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>club.minnced</groupId>
+                    <artifactId>opus-java</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- Fix for "Failed to load class "org.slf4j.impl.StaticLoggerBinder" -->
         <dependency>
