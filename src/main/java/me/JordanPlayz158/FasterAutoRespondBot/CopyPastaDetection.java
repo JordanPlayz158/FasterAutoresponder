@@ -40,7 +40,6 @@ public class CopyPastaDetection extends ListenerAdapter {
                     channel.sendMessage(getMember.getUser().getAsMention() + "'s message has been auto detected as a copypasta which is in violation of rule 23, please read the " + getGuild.getTextChannelById("546053935958327316").getAsMention()).queue();
                 }
                 channel.sendMessage(getGuild.getRoleById("742447734606528653").getAsMention() + " ```-warn " + getMember.getUser().getAsMention() + " Rule 23```").queue();
-                msg.delete().queue();
 
                 System.out.println("Log:\nGuild: " + guildName + autoAddBrackets(guildId)
                         + "\nChannel: " + channelName + autoAddBrackets(channelId)
@@ -48,6 +47,7 @@ public class CopyPastaDetection extends ListenerAdapter {
                         + "\nMessage: " + messageContent);
 
                 LoggerDiscord(event);
+                msg.delete().queue();
                 break;
             }
         }
@@ -56,7 +56,6 @@ public class CopyPastaDetection extends ListenerAdapter {
             if(msg.getContentRaw().toLowerCase().contains(s) && !msg.getAuthor().isBot()) {
                 channel.sendMessage(getMember.getUser().getAsMention() + "'s message has been auto detected as a copypasta which is in violation of rule 23, please read the " + getGuild.getTextChannelById("546053935958327316").getAsMention()).queue();
                 channel.sendMessage(getGuild.getRoleById("742447734606528653").getAsMention() + " ```-warn " + getMember.getUser().getAsMention() + " Rule 23```").queue();
-                msg.delete().queue();
 
                 System.out.println("Log:\nGuild: " + guildName + autoAddBrackets(guildId)
                         + "\nChannel: " + channelName + autoAddBrackets(channelId)
@@ -64,6 +63,7 @@ public class CopyPastaDetection extends ListenerAdapter {
                         + "\nMessage: " + messageContent);
 
                 LoggerDiscord(event);
+                msg.delete().queue();
                 break;
             }
         }
