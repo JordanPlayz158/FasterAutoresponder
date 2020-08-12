@@ -16,7 +16,7 @@ import java.nio.file.StandardCopyOption;
 
 public class Main {
 
-    public static void main(String[] args) throws LoginException, IOException {
+    public static void main(String[] args) throws LoginException, IOException, InterruptedException {
         // Initiates the log
         initiateLog();
 
@@ -35,7 +35,7 @@ public class Main {
                 .addEventListeners(new CopyPastaDetection())
                 .setActivity(Activity.watching("For CopyPastas"))
                 .setLargeThreshold(50)
-                .build();
+                .build().awaitReady();
     }
 
     private static void initiateLog() {
