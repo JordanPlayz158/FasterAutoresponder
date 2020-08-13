@@ -1,14 +1,18 @@
 package me.JordanPlayz158.FasterAutoRespondBot;
 
-import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
-
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-import me.JordanPlayz158.FasterAutoRespondBot.Utils;
+import me.JordanPlayz158.FasterAutoRespondBot.Util.Utils;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.requests.restaction.MessageAction;
 
 public class CopyPastaDetection extends ListenerAdapter 
 {
@@ -16,13 +20,16 @@ public class CopyPastaDetection extends ListenerAdapter
     @Override
     public void onMessageReceived(MessageReceivedEvent event) 
     {
+    	//Get the message recieved
         Message msg = event.getMessage();
+        
+        //Get message's properties
         MessageChannel channel = event.getChannel();
-
         Guild getGuild = msg.getGuild();
         Member getMember = msg.getMember();
         MessageChannel getChannel = msg.getChannel();
 
+        //Get the guild and channel's properties
         String guildName = getGuild.getName();
         String guildId = getGuild.getId();
         String channelName = getChannel.getName();
@@ -30,7 +37,8 @@ public class CopyPastaDetection extends ListenerAdapter
         String userName = getMember.getUser().getName();
         String userId = getMember.getUser().getId();
         String messageContent = msg.getContentRaw();
-
+        
+        //List of copypastas
         List<String> copypastas = Arrays.asList("copy & paste this message", 
             "copy and paste this message", 
             "copy & paste this msg", 
@@ -41,28 +49,40 @@ public class CopyPastaDetection extends ListenerAdapter
             "do not accept a friend request from", 
             "please spread the word of this to your other servers", 
             "if you see this user, do not accept his friend request and immediately block him");
-
+        
+        //The ASCII copypastas probably would be merge I guess?
         List<String> asciiCopypastas = Arrays.asList("copy and paste him in every discord server", 
             "this is memecat", 
             "this is memedog", 
             "this is lennypede");
 
+        //Iterate through the copypastas
         for(String s : copypastas) 
         {
+        	//Check if message is a copypasta
             if(msg.getContentRaw().toLowerCase().contains(s) && !msg.getAuthor().isBot())
             {
+            	//Send the warning message
+            	MessageAction action = channel.sendMessage(getMember.getUser().getAsMention() 
+            			+ "'s message has been auto detected as a copypasta which is in "
+            			+ "violation of rule 23, please read the " 
+            			+ getGuild.getTextChannelById("546053935958327316").getAsMention());
+            	
                 if(msg.getContentRaw().toLowerCase().contains("ip")) 
                 {
-                    File file = new File("CopyPasta_Hack_BS_Black.png");
-                    channel.sendMessage(getMember.getUser().getAsMention() + "'s message has been auto detected as a copypasta which is in violation of rule 23, please read the " + getGuild.getTextChannelById("546053935958327316").getAsMention())
-                            .addFile(file).queue();
-                } else 
-                {
-                    channel.sendMessage(getMember.getUser().getAsMention() + "'s message has been auto detected as a copypasta which is in violation of rule 23, please read the " + getGuild.getTextChannelById("546053935958327316").getAsMention()).queue();
+                    File file = new File(Thread.currentThread()
+                    		.getContextClassLoader().getResource("CopyPasta_Hack_BS_Black.png").getFile());
+                    action.addFile(file);
                 }
-                channel.sendMessage(getGuild.getRoleById("742447734606528653").getAsMention() + " ```-warn " + getMember.getUser().getAsMention() + " Rule 23```").queue();
+                
+                action.queue();
+                
+                //Send the message to copy pasta role
+                channel.sendMessage(getGuild.getRoleById("742447734606528653").getAsMention() 
+                		+ " ```-warn " + getMember.getUser().getAsMention() + " Rule 23```").queue();
 
-                String output = addStrings("Log:\nGuild: ", 
+                //Log the message
+                String output = Utils.addStrings("Log:\nGuild: ", 
                     guildName,
                     autoAddBrackets(guildId), "\nChannel: ", 
                     channelName,
@@ -72,25 +92,30 @@ public class CopyPastaDetection extends ListenerAdapter
                     "\nMessage: ", 
                     messageContent);
 
-                System.out.println(ouput);
+                System.out.println(output);
 
                 LoggerDiscord(event);
+                
+                //Delete the copypasta
                 msg.delete().queue();
                 break;
             }
         }
 
+        //This would probably be deleted soon I guess?
         for(String s : asciiCopypastas) 
         {
             if(msg.getContentRaw().toLowerCase().contains(s) && !msg.getAuthor().isBot()) 
             {
                 channel.sendMessage(getMember.getUser().getAsMention() 
-                    + "'s message has been auto detected as a copypasta which is in violation of rule 23, please read the " 
+                    + "'s message has been auto detected as a copypasta which is in violation of rule 23, "
+                    + " read the " 
                     + getGuild.getTextChannelById("546053935958327316").getAsMention()).queue();
 
-                channel.sendMessage(getGuild.getRoleById("742447734606528653").getAsMention() + " ```-warn " + getMember.getUser().getAsMention() + " Rule 23```").queue();
+                channel.sendMessage(getGuild.getRoleById("742447734606528653").getAsMention() + 
+                		" ```-warn " + getMember.getUser().getAsMention() + " Rule 23```").queue();
 
-                String output = addStrings("Log:\nGuild: ",
+                String output = Utils.addStrings("Log:\nGuild: ",
                     guildName,
                     autoAddBrackets(guildId),
                     "\nChannel: ",
@@ -110,6 +135,7 @@ public class CopyPastaDetection extends ListenerAdapter
         }
     }
 
+    //Adds brackets
     public String autoAddBrackets(String raw) 
     {
         String result = "";

@@ -1,4 +1,4 @@
-package me.JordanPlayz158.Util;
+package me.JordanPlayz158.FasterAutoRespondBot.Util;
 
 //Utils class
 public class Utils
