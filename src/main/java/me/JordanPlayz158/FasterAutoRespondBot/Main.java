@@ -1,27 +1,30 @@
 package me.JordanPlayz158.FasterAutoRespondBot;
 
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.requests.GatewayIntent;
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-
-import javax.security.auth.login.LoginException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
-public class Main {
+import javax.security.auth.login.LoginException;
 
-    public static void main(String[] args) throws LoginException, IOException, InterruptedException {
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.requests.GatewayIntent;
+
+public class Main 
+{
+    public static void main(String[] args) throws LoginException, IOException, InterruptedException 
+    {
         // Initiates the log
         initiateLog();
-
+        
+        //Copy config
         copyFile("config.yml", "config.yml");
-        copyFile("CopyPasta_Hack_BS_Black.png", "CopyPasta_Hack_BS_Black.png");
 
         // Checks if the Token is less than 1 character and if so, tell the person they need to provide a token
         if (args.length < 1) {
@@ -38,14 +41,17 @@ public class Main {
                 .build().awaitReady();
     }
 
-    private static void initiateLog() {
+    private static void initiateLog() 
+    {
         // Fix for "Failed to load class "org.slf4j.impl.StaticLoggerBinder"
         BasicConfigurator.configure();
+        
         // Only log INFO logs as to not make console messy with DEBUG logs
         Logger.getRootLogger().setLevel(Level.INFO);
     }
 
-    private static void copyFile(String internalName, String externalName) throws IOException {
+    private static void copyFile(String internalName, String externalName) throws IOException 
+    {
         File fileDest = new File(externalName);
         InputStream fileSrc = Thread.currentThread().getContextClassLoader().getResourceAsStream(internalName);
 
