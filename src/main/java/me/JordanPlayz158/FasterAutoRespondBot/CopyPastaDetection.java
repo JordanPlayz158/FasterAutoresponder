@@ -29,6 +29,9 @@ public class CopyPastaDetection extends ListenerAdapter {
             "this is memedog",
             "this is lennypede");
 
+    File file = new File(Thread.currentThread()
+            .getContextClassLoader().getResource("CopyPasta_Hack_BS_Black.png").getFile());
+
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         if(event.getMessage().getAuthor().isBot())
@@ -62,8 +65,6 @@ public class CopyPastaDetection extends ListenerAdapter {
             			+ getGuild.getTextChannelById("546053935958327316").getAsMention());
             	
                 if(msg.getContentRaw().toLowerCase().contains("ip")) {
-                    File file = new File(Thread.currentThread()
-                    		.getContextClassLoader().getResource("CopyPasta_Hack_BS_Black.png").getFile());
                     action.addFile(file);
                 }
                 
