@@ -11,8 +11,28 @@ import java.util.List;
 
 public class CopyPastaDetection extends ListenerAdapter {
 
+    //List of copypastas
+    List<String> copypastas = Arrays.asList("copy & paste this message",
+            "copy and paste this message",
+            "copy & paste this msg",
+            "copy and paste this msg",
+            "copy and paste him in every discord server",
+            "send this to all the servers you are in",
+            "send this to all servers you are in",
+            "send this message to all the servers",
+            "send this message to all servers",
+            "tell everyone on your friends list",
+            "do not accept a friend request from",
+            "please spread the word of this to your other servers",
+            "if you see this user, do not accept his friend request and immediately block him",
+            "this is memecat",
+            "this is memedog",
+            "this is lennypede");
+
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
+        if(event.getMessage().getAuthor().isBot())
+            return;
     	//Get the message received
         Message msg = event.getMessage();
         
@@ -30,24 +50,6 @@ public class CopyPastaDetection extends ListenerAdapter {
         String userName = getMember.getUser().getName();
         String userId = getMember.getUser().getId();
         String messageContent = msg.getContentRaw();
-        
-        //List of copypastas
-        List<String> copypastas = Arrays.asList("copy & paste this message", 
-            "copy and paste this message", 
-            "copy & paste this msg", 
-            "copy and paste this msg",
-            "copy and paste him in every discord server",
-            "send this to all the servers you are in",
-            "send this to all servers you are in",
-            "send this message to all the servers",
-            "send this message to all servers",
-            "tell everyone on your friends list", 
-            "do not accept a friend request from", 
-            "please spread the word of this to your other servers", 
-            "if you see this user, do not accept his friend request and immediately block him",
-            "this is memecat",
-            "this is memedog",
-            "this is lennypede");
 
         //Iterate through the copypastas
         for(String s : copypastas) {
