@@ -1,25 +1,21 @@
 package me.JordanPlayz158.FasterAutoRespondBot;
 
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.requests.GatewayIntent;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
+import javax.security.auth.login.LoginException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
-import javax.security.auth.login.LoginException;
-
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.requests.GatewayIntent;
-
-public class Main 
-{
-    public static void main(String[] args) throws LoginException, IOException, InterruptedException 
-    {
+public class Main {
+    public static void main(String[] args) throws LoginException, IOException, InterruptedException {
         // Initiates the log
         initiateLog();
         
@@ -41,17 +37,15 @@ public class Main
                 .build().awaitReady();
     }
 
-    private static void initiateLog() 
-    {
+    private static void initiateLog() {
         // Fix for "Failed to load class "org.slf4j.impl.StaticLoggerBinder"
         BasicConfigurator.configure();
         
         // Only log INFO logs as to not make console messy with DEBUG logs
-        Logger.getRootLogger().setLevel(Level.INFO);
+        Logger.getRootLogger().setLevel(Level.DEBUG);
     }
 
-    private static void copyFile(String internalName, String externalName) throws IOException 
-    {
+    private static void copyFile(String internalName, String externalName) throws IOException {
         File fileDest = new File(externalName);
         InputStream fileSrc = Thread.currentThread().getContextClassLoader().getResourceAsStream(internalName);
 
