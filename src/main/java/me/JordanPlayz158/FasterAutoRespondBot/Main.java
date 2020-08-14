@@ -32,7 +32,7 @@ public class Main {
             System.exit(1);
         }
 
-        // args[0] should be the token -------> Token will soon be going into a config.yml and read from it
+        // Token and activity is read from and set in the config.json
         // This bot only needs to respond to guild messages so it only needs GatewayIntent.GUILD_MESSAGES
         JDABuilder.createLight(token, GatewayIntent.GUILD_MESSAGES)
                 .addEventListeners(new CopyPastaDetection())
