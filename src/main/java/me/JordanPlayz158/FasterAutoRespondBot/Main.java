@@ -6,11 +6,12 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import javax.security.auth.login.LoginException;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
@@ -20,21 +21,35 @@ public class Main {
         initiateLog();
         
         //Copy config
-        copyFile("config.yml", "config.yml");
+        copyFile("config.json", "config.json");
+
+        String token = loadConfig("config.json", "token");
+        String activity = loadConfig("config.json", "activity");
 
         // Checks if the Token is less than 1 character and if so, tell the person they need to provide a token
-        if (args.length < 1) {
-            System.out.println("You have to provide a token as first argument!");
+        if (token == null) {
+            System.out.println("You have to provide a token in your config file!");
             System.exit(1);
         }
 
         // args[0] should be the token -------> Token will soon be going into a config.yml and read from it
         // This bot only needs to respond to guild messages so it only needs GatewayIntent.GUILD_MESSAGES
-        JDABuilder.createLight(args[0], GatewayIntent.GUILD_MESSAGES)
+        JDABuilder.createLight(token, GatewayIntent.GUILD_MESSAGES)
                 .addEventListeners(new CopyPastaDetection())
-                .setActivity(Activity.watching("For CopyPastas"))
+                .setActivity(Activity.watching(activity))
                 .setLargeThreshold(50)
                 .build().awaitReady();
+    }
+
+    private static String loadConfig(String file, String key) {
+        JSONParser jsonParser = new JSONParser();
+        try {
+            JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(file));
+            return (String) jsonObject.get(key);
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+        return "0";
     }
 
     private static void initiateLog() {
@@ -49,6 +64,8 @@ public class Main {
         File fileDest = new File(externalName);
         InputStream fileSrc = Thread.currentThread().getContextClassLoader().getResourceAsStream(internalName);
 
-        Files.copy(fileSrc, fileDest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        if(fileDest.createNewFile()) {
+            Files.copy(fileSrc, fileDest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        }
     }
 }
