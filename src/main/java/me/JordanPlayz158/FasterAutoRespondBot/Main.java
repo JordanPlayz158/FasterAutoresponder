@@ -26,8 +26,8 @@ public class Main {
         String token = loadConfig("config.json", "token");
         String activity = loadConfig("config.json", "activity");
 
-        // Checks if the Token is less than 1 character and if so, tell the person they need to provide a token
-        if (token == null) {
+        // Checks if the Token is 1 character or less and if so, tell the person they need to provide a token
+        if (token.length() <= 1) {
             System.out.println("You have to provide a token in your config file!");
             System.exit(1);
         }
