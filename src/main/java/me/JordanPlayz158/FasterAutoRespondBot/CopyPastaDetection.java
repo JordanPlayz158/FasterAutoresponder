@@ -51,6 +51,7 @@ public class CopyPastaDetection extends ListenerAdapter {
         String channelName = getChannel.getName();
         String channelId = getChannel.getId();
         String userName = getMember.getUser().getName();
+        String userMention = getMember.getUser().getAsMention();
         String userId = getMember.getUser().getId();
         String messageContent = msg.getContentRaw();
 
@@ -59,10 +60,9 @@ public class CopyPastaDetection extends ListenerAdapter {
         	//Check if message is a copypasta
             if(msg.getContentRaw().toLowerCase().contains(s) && !msg.getAuthor().isBot()) {
             	//Send the warning message
-            	MessageAction action = channel.sendMessage(getMember.getUser().getAsMention() 
-            			+ "'s message has been auto detected as a copypasta which is in "
-            			+ "violation of rule 23, please read the "
-            			+ getGuild.getTextChannelById("546053935958327316").getAsMention());
+            	MessageAction action = channel.sendMessage(userMention
+            			+ Main.loadConfig("config.json", "detectionMessage")
+            			+ getGuild.getTextChannelById(Main.loadConfig("config.json", "rulesChannel")).getAsMention());
             	
                 if(msg.getContentRaw().toLowerCase().contains("ip")) {
                     action.addFile(file);
@@ -71,8 +71,8 @@ public class CopyPastaDetection extends ListenerAdapter {
                 action.queue();
                 
                 //Send the message to copy pasta role
-                channel.sendMessage(getGuild.getRoleById("742447734606528653").getAsMention() 
-                		+ " ```-warn " + getMember.getUser().getAsMention() + " Rule 23```").queue();
+                channel.sendMessage(getGuild.getRoleById(Main.loadConfig("config.json", "warnsRole")).getAsMention()
+                		+ Main.loadConfig("config.json", "warnMessage")).queue();
 
                 //Log the message
                 System.out.println("Log:\nGuild: "

@@ -41,7 +41,7 @@ public class Main {
                 .build().awaitReady();
     }
 
-    private static String loadConfig(String file, String key) {
+    public static String loadConfig(String file, String key) {
         JSONParser jsonParser = new JSONParser();
         try {
             JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(file));

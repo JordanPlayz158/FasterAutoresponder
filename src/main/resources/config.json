@@ -1,5 +1,9 @@
 {
     "token": "",
     "activityType": "watching",
-    "activity": "For CopyPastas"
+    "activity": "For CopyPastas",
+    "detectionMessage": "'s message has been auto detected as a copypasta which is in violation of rule 23, please read the ",
+    "warnMessage": "```-warn \" + userMention + \" Rule 23```",
+    "warnsRole": "742447734606528653",
+    "rulesChannel": "546053935958327316"
 }
