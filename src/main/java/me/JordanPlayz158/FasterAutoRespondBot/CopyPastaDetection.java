@@ -29,8 +29,7 @@ public class CopyPastaDetection extends ListenerAdapter {
             "this is memedog",
             "this is lennypede");
 
-    File file = new File(Thread.currentThread()
-            .getContextClassLoader().getResource("CopyPasta_Hack_BS_Black.png").getFile());
+    File file = new File("warnImage.png");
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {

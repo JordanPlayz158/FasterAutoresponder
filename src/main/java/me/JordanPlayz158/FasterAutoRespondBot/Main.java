@@ -22,6 +22,7 @@ public class Main {
         
         //Copy config
         copyFile("config.json", "config.json");
+        copyFile("warnImage.png", "warnImage.png");
 
         String token = loadConfig("config.json", "token");
         String activity = loadConfig("config.json", "activity");
@@ -37,8 +38,8 @@ public class Main {
         JDABuilder.createLight(token, GatewayIntent.GUILD_MESSAGES)
                 .addEventListeners(new CopyPastaDetection())
                 .setActivity(appendActivity(activity))
-                .setLargeThreshold(50)
-                .build().awaitReady();
+                .build()
+                .awaitReady();
     }
 
     public static String loadConfig(String file, String key) {
