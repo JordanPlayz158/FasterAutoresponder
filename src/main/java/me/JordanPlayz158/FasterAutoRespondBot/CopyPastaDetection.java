@@ -72,7 +72,7 @@ public class CopyPastaDetection extends ListenerAdapter {
                 
                 //Send the message to copy pasta role
                 channel.sendMessage(getGuild.getRoleById(Main.loadConfig("config.json", "warnsRole")).getAsMention()
-                		+ "```" + Main.loadConfig("config.json", "warnCommand") + userMention + Main.loadConfig("config.json", "warnMessage") + "```").queue();
+                		+ "```" + Main.loadConfig("config.json", "warnCommand") + " " + userMention + " " + Main.loadConfig("config.json", "warnMessage") + "```").queue();
 
                 //Log the message
                 System.out.println("Log:\nGuild: "
