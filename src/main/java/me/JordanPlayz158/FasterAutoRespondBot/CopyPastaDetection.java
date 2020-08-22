@@ -121,13 +121,11 @@ public class CopyPastaDetection extends ListenerAdapter {
         String channelMention = msg.getTextChannel().getAsMention();
         String userMention = getMember.getAsMention();
         String messageContent = msg.getContentRaw();
-        String messageURL = msg.getJumpUrl();
 
         textChannel.sendMessage("Guild: " + guildName + autoAddBrackets(guildId)
                 + "\nChannel: " + channelMention
                 + "\nUser: " + userMention
-                + "\nMessage: " + messageContent
-                + "\n" + messageURL).queue();
+                + "\nMessage: " + messageContent).queue();
     }
 
     public void LoggerConsole(MessageReceivedEvent event) {
