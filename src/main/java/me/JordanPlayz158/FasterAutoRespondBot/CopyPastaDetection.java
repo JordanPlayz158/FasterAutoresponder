@@ -106,7 +106,7 @@ public class CopyPastaDetection extends ListenerAdapter {
     }
 
     public void LoggerDiscord(MessageReceivedEvent event) {
-        TextChannel textChannel = event.getGuild().getTextChannelsByName(Main.loadConfig("config.json", "logChannel"), true).get(0);
+        TextChannel textChannel = event.getGuild().getTextChannelById(Main.loadConfig("config.json", "logChannel"));
 
         //Get the message received
         Message msg = event.getMessage();
