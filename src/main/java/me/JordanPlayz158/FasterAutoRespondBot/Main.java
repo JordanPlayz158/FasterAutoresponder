@@ -38,7 +38,7 @@ public class Main {
         // This bot only needs to respond to guild messages so it only needs GatewayIntent.GUILD_MESSAGES
         JDABuilder.createLight(token, GatewayIntent.GUILD_MESSAGES)
                 .addEventListeners(new CopyPastaDetection())
-                .setActivity(Activity.of(Activity.ActivityType.valueOf(activityType), activity))
+                .setActivity(Activity.of(Activity.ActivityType.valueOf(activityType.toUpperCase()), activity))
                 .build()
                 .awaitReady();
     }
