@@ -29,7 +29,7 @@ public class CopyPastaDetection extends ListenerAdapter {
             "this is memedog",
             "this is lennypede");
 
-    File file = new File("warnImage.png");
+    final File file = new File("warnImage.png");
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
@@ -73,18 +73,20 @@ public class CopyPastaDetection extends ListenerAdapter {
                 channel.sendMessage(getGuild.getRoleById(Main.loadConfig("config.json", "warnsRole")).getAsMention()
                 		+ "```" + Main.loadConfig("config.json", "warnCommand") + " " + userMention + " " + Main.loadConfig("config.json", "warnMessage") + "```").queue();
 
-                //Log the message
-                System.out.println("Log:\nGuild: "
-                        + guildName
-                        + autoAddBrackets(guildId) + "\nChannel: "
-                        + channelName
-                        + autoAddBrackets(channelId) + "\nUser: "
-                        + userName
-                        + autoAddBrackets(userId)
-                        + "\nMessage: "
-                        + messageContent);
-
-                LoggerDiscord(event);
+                switch(Main.loadConfig("config.json", "logOption").toLowerCase()) {
+                    case "discord":
+                        LoggerDiscord(event);
+                        break;
+                    case "console":
+                        LoggerConsole(event);
+                        break;
+                    case "both":
+                        LoggerConsole(event);
+                        LoggerDiscord(event);
+                        break;
+                    default:
+                        break;
+                }
                 
                 //Delete the copypasta
                 msg.delete().queue();
@@ -104,14 +106,40 @@ public class CopyPastaDetection extends ListenerAdapter {
     }
 
     public void LoggerDiscord(MessageReceivedEvent event) {
-        TextChannel textChannel = event.getGuild().getTextChannelsByName("copypastalogs", true).get(0);
+        TextChannel textChannel = event.getGuild().getTextChannelsByName(Main.loadConfig("config.json", "logChannel"), true).get(0);
 
+        //Get the message received
         Message msg = event.getMessage();
 
+        //Get message's properties
+        Guild getGuild = msg.getGuild();
+        Member getMember = msg.getMember();
+
+        //Get the guild and channel's properties
+        String guildName = getGuild.getName();
+        String guildId = getGuild.getId();
+        String channelMention = msg.getTextChannel().getAsMention();
+        String userMention = getMember.getAsMention();
+        String messageContent = msg.getContentRaw();
+        String messageURL = msg.getJumpUrl();
+
+        textChannel.sendMessage("Guild: " + guildName + autoAddBrackets(guildId)
+                + "\nChannel: " + channelMention
+                + "\nUser: " + userMention
+                + "\nMessage: " + messageContent
+                + "\n" + messageURL).queue();
+    }
+
+    public void LoggerConsole(MessageReceivedEvent event) {
+        //Get the message received
+        Message msg = event.getMessage();
+
+        //Get message's properties
         Guild getGuild = msg.getGuild();
         Member getMember = msg.getMember();
         MessageChannel getChannel = msg.getChannel();
 
+        //Get the guild and channel's properties
         String guildName = getGuild.getName();
         String guildId = getGuild.getId();
         String channelName = getChannel.getName();
@@ -120,9 +148,15 @@ public class CopyPastaDetection extends ListenerAdapter {
         String userId = getMember.getUser().getId();
         String messageContent = msg.getContentRaw();
 
-        textChannel.sendMessage("Log:\nGuild: " + guildName + autoAddBrackets(guildId)
-                + "\nChannel: " + channelName + autoAddBrackets(channelId)
-                + "\nUser: " + userName + autoAddBrackets(userId)
-                + "\nMessage: " + messageContent).queue();
+        //Log the message
+        System.out.println("Log:\nGuild: "
+                + guildName
+                + autoAddBrackets(guildId) + "\nChannel: "
+                + channelName
+                + autoAddBrackets(channelId) + "\nUser: "
+                + userName
+                + autoAddBrackets(userId)
+                + "\nMessage: "
+                + messageContent);
     }
 }

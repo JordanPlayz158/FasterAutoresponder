@@ -6,5 +6,8 @@
     "warnCommand": "-warn",
     "warnMessage": "Rule 23",
     "warnsRole": "742447734606528653",
-    "rulesChannel": "546053935958327316"
+    "rulesChannel": "546053935958327316",
+    "logChannel": "copypastalogs",
+    "_logOptionComment": "Options for logOption are, discord, console, both, or none",
+    "logOption": "both"
 }

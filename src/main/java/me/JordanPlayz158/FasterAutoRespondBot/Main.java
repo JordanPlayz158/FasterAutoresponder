@@ -26,6 +26,7 @@ public class Main {
 
         String token = loadConfig("config.json", "token");
         String activity = loadConfig("config.json", "activity");
+        String activityType = loadConfig("config.json", "activityType");
 
         // Checks if the Token is 1 character or less and if so, tell the person they need to provide a token
         if (token.length() <= 1) {
@@ -37,7 +38,7 @@ public class Main {
         // This bot only needs to respond to guild messages so it only needs GatewayIntent.GUILD_MESSAGES
         JDABuilder.createLight(token, GatewayIntent.GUILD_MESSAGES)
                 .addEventListeners(new CopyPastaDetection())
-                .setActivity(appendActivity(activity))
+                .setActivity(Activity.of(Activity.ActivityType.valueOf(activityType), activity))
                 .build()
                 .awaitReady();
     }
@@ -51,20 +52,6 @@ public class Main {
             e.printStackTrace();
         }
         return "0";
-    }
-
-    private static Activity appendActivity(String activity) {
-        String activityType = loadConfig("config.json", "activityType");
-
-        switch(activityType) {
-            case "watching":
-                return Activity.watching(activity);
-            case "playing":
-                return Activity.playing(activity);
-            case "listening":
-                return Activity.listening(activity);
-        }
-        return Activity.listening("failed to set Activity");
     }
 
     private static void initiateLog() {
