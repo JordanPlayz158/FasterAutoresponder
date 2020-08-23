@@ -35,6 +35,14 @@ public class CopyPastaDetection extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event) {
         if(event.getMessage().getAuthor().isBot())
             return;
+
+        if(event.getMessage().getContentRaw().startsWith(Main.loadConfig("config.json", "prefix"))) {
+            switch(event.getMessage().getContentRaw()) {
+                case "reloadConfig":
+                    Main.reloadConfig();
+            }
+        }
+
     	//Get the message received
         Message msg = event.getMessage();
         

@@ -11,7 +11,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.security.auth.login.LoginException;
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
@@ -52,6 +55,10 @@ public class Main {
             e.printStackTrace();
         }
         return "0";
+    }
+
+    public static void reloadConfig() {
+
     }
 
     private static void initiateLog() {

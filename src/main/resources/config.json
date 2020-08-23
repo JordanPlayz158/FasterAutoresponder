@@ -1,5 +1,6 @@
 {
     "token": "",
+    "prefix": "+",
     "activityType": "watching",
     "activity": "For CopyPastas",
     "detectionMessage": "'s message has been auto detected as a copypasta which is in violation of rule 23, please read the ",
