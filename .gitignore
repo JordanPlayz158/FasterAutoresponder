@@ -1,6 +1,9 @@
 /target
 /.idea
 /.settings
-Faster-Autorespond-Bot.iml
+FasterAutoresponder.iml
 .project
 .classpath
+config.json
+copypastas.json
+warnImage.png

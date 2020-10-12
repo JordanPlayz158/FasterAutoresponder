@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.JordanPlayz158</groupId>
-    <artifactId>Faster-Autorespond-Bot</artifactId>
+    <artifactId>FasterAutoresponder</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <url>https://jordanplayz158.me</url>
@@ -16,7 +16,7 @@
     </properties>
 
     <build>
-        <finalName>FasterAutoRespond</finalName>
+        <finalName>FasterAutoresponder</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -41,7 +41,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>me.JordanPlayz158.FasterAutoRespondBot.Main</mainClass>
+                                    <mainClass>me.JordanPlayz158.FasterAutoresponder.Main</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
@@ -61,6 +61,10 @@
             <id>jcenter</id>
             <name>jcenter-bintray</name>
             <url>https://jcenter.bintray.com</url>
+        </repository>
+        <repository>
+            <id>My-Private-Maven-Repository</id>
+            <url>https://maven.jordanplayz158.me/snapshots</url>
         </repository>
     </repositories>
 
@@ -84,9 +88,14 @@
             <version>1.7.5</version>
         </dependency>
         <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.6</version>
+        </dependency>
+        <dependency>
+            <groupId>me.JordanPlayz158</groupId>
+            <artifactId>Utils</artifactId>
+            <version>2.1.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

@@ -4,10 +4,10 @@
     "activityType": "watching",
     "activity": "For CopyPastas",
     "detectionMessage": "'s message has been auto detected as a copypasta which is in violation of rule 23, please read the ",
+    "rulesChannel": "546053935958327316",
     "warnCommand": "-warn",
     "warnMessage": "Rule 23",
     "warnsRole": "742447734606528653",
-    "rulesChannel": "546053935958327316",
     "logChannel": "742948505206915092",
     "_logOptionComment": "Options for logOption are, discord, console, both, or none",
     "logOption": "both"
