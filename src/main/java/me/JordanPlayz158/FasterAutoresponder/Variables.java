@@ -13,4 +13,8 @@ public class Variables {
 
     //List of copypastas
     public static List<String> copypastas = loadJson.array(copypastasFile, "detectionStrings");
+
+    public static void reloadCopypastasList() {
+        copypastas = loadJson.array(copypastasFile, "detectionStrings");
+    }
 }
