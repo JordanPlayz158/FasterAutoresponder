@@ -8,6 +8,3 @@ You can obtain the pre-compiled jar from my [jenkins server!](https://jordanplay
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-## License
-[MIT]((https://choosealicense.com/licenses/mit/)
